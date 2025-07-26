@@ -75,6 +75,10 @@ public class Main {
         myList.display();
 
         myList.addElement(23);
+
+        myList.display();
+        System.out.println( myList.getCapacity() );
+
         myList.addElement(100);
 
         myList.display();
@@ -89,6 +93,13 @@ public class Main {
         if (myList.isEmpty()) {
             System.out.println("Your list is empty");
         }
+
+        // duplicate the list
+        IntegerList myList2 = myList.duplicate();
+
+        int comp = myList2.compareTo(myList);
+
+        System.out.println("Comparison result: " + comp);
     }
 
 }

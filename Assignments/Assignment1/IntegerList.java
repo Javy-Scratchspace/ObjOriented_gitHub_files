@@ -10,7 +10,7 @@
  * @version 1.0
  */
 
-public class IntegerList {
+public class IntegerList implements Comparable<IntegerList> {
 
     int arrayCapacity; 
     int elementCount;
@@ -21,7 +21,7 @@ public class IntegerList {
     // Default constructor
     public IntegerList() {
         this.elementCount = 0; 
-        createArray(0); // Creates an internal empty array
+        createArray(10); // Creates an internal empty array of size 10
     }
 
     // Create the class with an initial capacity
@@ -52,7 +52,7 @@ public class IntegerList {
     // This deletes/clears the array and makes a new one. 
     public void clear() {
         // "Reset" the array with a size of 0
-        createArray(0);
+        createArray(10);
         this.elementCount = 0; 
     }
 
@@ -87,7 +87,12 @@ public class IntegerList {
     }
 
     // Calculates the average and returns a double value
-    public double getAverage() {
+    public double getAverage() {        
+        if (this.elementCount == 0) {
+            System.out.println("Unable to get average because element count is 0");
+            return 0; 
+        }
+        
         double sum = 0; 
         for (int i = 0; i < this.elementCount; i++) {
             sum += this.internalArray[i];
@@ -124,7 +129,7 @@ public class IntegerList {
         }
         
         // Checks for each element
-        for(int i = 0; i < this.arrayCapacity; i++) {
+        for(int i = 0; i < this.elementCount; i++) {
             if (this.internalArray[i] != otherList.internalArray[i]) {
                 return false; 
             }
@@ -136,7 +141,7 @@ public class IntegerList {
     // takes the array in this class and reverses is elements
     public void reverse() {
         IntegerList newList = duplicate();
-        for (int i = 0; i < this.arrayCapacity; i++) {
+        for (int i = 0; i < this.elementCount; i++) {
             this.internalArray[this.arrayCapacity-i-1] = newList.internalArray[i];
         }
     }
@@ -144,5 +149,25 @@ public class IntegerList {
     // Sets a new element within a specified index
     public void setElementAt(int index, int newValue) {
         this.internalArray[index] = newValue; 
+    }
+
+    // Compare to function that compares two of the same class 
+    // TODO: Work on this for a possibility at resubmitting the document
+    public int compareTo(IntegerList other) {
+        if (this.arrayCapacity != other.arrayCapacity) {
+            return -1;
+        }
+
+        if (this.elementCount != other.elementCount) {
+            return -1;
+        }
+
+        for (int i = 0; i < this.elementCount; i++) {
+            if (this.internalArray[i] != other.internalArray[i]) {
+                return -1;
+            }
+        }
+
+        return 0;
     }
 }
